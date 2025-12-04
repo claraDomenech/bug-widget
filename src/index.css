@@ -12,10 +12,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-      max-width: 450px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
+    min-width: 400px;
 }
 
 a {
@@ -31,7 +31,7 @@ body {
   margin: 0;
   display: flex;
   place-content: center;
-  min-width: 620px;
+  min-width: 100%;
   min-height: 100vh;
 }
 
@@ -68,4 +68,9 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
+}
+#root {
+  width: 100%;
+  min-height: 100vh;
+  max-width:500px;
 }

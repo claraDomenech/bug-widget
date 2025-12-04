@@ -79,22 +79,22 @@ export default function Formulario() {
 
   return (
     <>
-     <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md mx-auto">
-  <div className="flex flex-col gap-6 w-full">
+     <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-4 rounded-md shadow-md mx-auto">
+  <div className="flex flex-col w-full">
 
     {/* Textarea */}
     <textarea
-      placeholder="Descripción"
+      placeholder="Describe la incidencia..."
       value={description}
       onChange={(e) => setDescription(e.target.value)}
       required
       className="
         w-full
-        min-h-[160px]
-        p-4
+        min-h-[120px]
+        p-2
         border border-gray-300
-        rounded-md
-        text-base
+        rounded-sm
+        text-sm
         text-gray-700
         focus:outline-none
         focus:border-blue-500
@@ -104,9 +104,8 @@ export default function Formulario() {
       "
     />
 
-    {/* Input de archivo */}
-    <label className="flex items-center gap-3 cursor-pointer w-fit">
-      <span className="bg-gray-200 text-gray-700 text-sm px-5 py-2 rounded-md hover:bg-gray-300 transition">
+    <label className="flex items-center gap-3 cursor-pointer mt-4 w-fit">
+      <span className="bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-sm hover:bg-gray-300 transition">
         Seleccionar archivo
       </span>
       <input
@@ -119,7 +118,7 @@ export default function Formulario() {
 
     {/* Nombre del archivo */}
     {imageName && (
-      <p className="text-sm text-gray-600">
+      <p className="text-xs text-gray-600">
         Archivo seleccionado: <span className="font-medium">{imageName}</span>
       </p>
     )}
@@ -129,12 +128,16 @@ export default function Formulario() {
       type="submit"
       disabled={loading}
       className="
-        bg-blue-600 
-    text-white 
-    px-6 py-3 
-    disabled:bg-blue-400 
-    disabled:text-white 
-    disabled:cursor-not-allowed
+        bg-blue-600
+        disabled:bg-blue-400
+        text-white
+        px-4
+        py-2
+        rounded-sm
+        hover:bg-blue-700
+        transition
+        mt-6
+        w-fit
       "
     >
       {loading ? "Enviando..." : "Enviar"}
