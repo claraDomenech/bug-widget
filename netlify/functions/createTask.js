@@ -38,7 +38,7 @@ export async function handler(event) {
     if (!description) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: "Se requere descripción" }),
+        body: JSON.stringify({ error: "Se requiere descripción" }),
       };
     }
 
@@ -117,7 +117,7 @@ export async function handler(event) {
       }
     }
 
-    // Return si no tenemos laimagen
+    // Return si no tenemos la imagen
     if (!imageBase64) {
       return {
         statusCode: 200,
