@@ -16,6 +16,7 @@ export async function handler(event) {
   const ASANA_PROJECT_GID = process.env.ASANA_PROJECT_GID;
   const ASANA_ASSIGNEE_GID = process.env.ASANA_ASSIGNEE_GID;
   const ASANA_SECTION_GID = process.env.ASANA_DEFAULT_SECTION_GID;
+ const ASANA_URGENTE_GID = process.env.ASANA_URGENTE_SECTION_GID;
 
   if (
     !ASANA_TOKEN ||
@@ -33,7 +34,8 @@ export async function handler(event) {
 
   try {
     const body = JSON.parse(event.body);
-    const { description, imageBase64, imageName } = body;
+    const { description, imageBase64, imageName, urgent } = body;
+    const sectionGID = urgent ? ASANA_URGENTE_GID : ASANA_SECTION_GID;
 
     if (!description) {
       return {
@@ -89,9 +91,10 @@ export async function handler(event) {
     //TODO: ver como metemos las etiquetas de urgente, etc....
     let sectionResult = null;
 
-    if (ASANA_SECTION_GID) {
-      const sectionRes = await fetch(
-        `https://app.asana.com/api/1.0/sections/${ASANA_SECTION_GID}/addTask`,
+   if (sectionGID) {
+  const sectionRes = await fetch(
+    `https://app.asana.com/api/1.0/sections/${sectionGID}/addTask`,
+
         {
           method: "POST",
           headers: {
@@ -166,7 +169,7 @@ export async function handler(event) {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: "Se ha credo la tarea y se ha subido la imagen correctamente",
+        message: "Su incidencia ha sido reportada",
         task,
         sectionResult,
         attachment: attachData.data,

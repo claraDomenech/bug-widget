@@ -8,7 +8,7 @@ export default function Formulario() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [imageName, setImageName] = useState("");
-
+  const [urgent, setUrgent] = useState(false);
 
   // Manejar selección de imagen y generar previsualización
   const handleImageChange = (e) => {
@@ -42,7 +42,7 @@ export default function Formulario() {
         });
       }
 
-      const body = { description, imageBase64, imageName };
+      const body = { description, imageBase64, imageName, urgent };
       console.log("Body que se enviará a Netlify:", body);
 
       // Llamada a Netlify Function
@@ -103,7 +103,15 @@ export default function Formulario() {
         transition
       "
     />
-
+ <label className="inline-flex items-center gap-2 text-sm text-gray-700 mt-2">
+    <input
+      type="checkbox"
+      checked={urgent}
+      onChange={(e) => setUrgent(e.target.checked)}
+      className="form-checkbox h-4 w-4 text-blue-600 rounded-sm"
+    />
+    Incidencia urgente
+  </label>
     <label className="flex items-center gap-3 cursor-pointer mt-4 w-fit">
       <span className="bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-sm hover:bg-gray-300 transition">
         Seleccionar archivo
