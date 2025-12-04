@@ -7,19 +7,18 @@ export default function Formulario() {
   const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [imageName, setImageName] = useState("");
+
 
   // Manejar selección de imagen y generar previsualización
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const file = e.target.files[0];
+  if (!file) return;
 
-    setImageFile(file);
+  setImageFile(file);
+  setImageName(file.name); // << nombre del archivo
+};
 
-    const reader = new FileReader();
-    reader.onload = () => setImagePreview(reader.result);
-    reader.onerror = () => setError("Error al leer la imagen");
-    reader.readAsDataURL(file);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,46 +79,73 @@ export default function Formulario() {
 
   return (
     <>
-      <h1>Formulario</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="description">Descripción:</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
+     <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md mx-auto">
+  <div className="flex flex-col gap-6 w-full">
 
-        <div>
-          <label htmlFor="imagen">Subir imagen:</label>
-          <input
-            type="file"
-            id="imagen"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
+    {/* Textarea */}
+    <textarea
+      placeholder="Descripción"
+      value={description}
+      onChange={(e) => setDescription(e.target.value)}
+      required
+      className="
+        w-full
+        min-h-[160px]
+        p-4
+        border border-gray-300
+        rounded-md
+        text-base
+        text-gray-700
+        focus:outline-none
+        focus:border-blue-500
+        focus:ring-1
+        focus:ring-blue-300
+        transition
+      "
+    />
 
-        {imagePreview && (
-          <div>
-            <p>Previsualización:</p>
-            <img
-              src={imagePreview}
-              alt="Previsualización"
-              style={{ maxWidth: "200px", maxHeight: "200px" }}
-            />
-          </div>
-        )}
+    {/* Input de archivo */}
+    <label className="flex items-center gap-3 cursor-pointer w-fit">
+      <span className="bg-gray-200 text-gray-700 text-sm px-5 py-2 rounded-md hover:bg-gray-300 transition">
+        Seleccionar archivo
+      </span>
+      <input
+        type="file"
+        className="hidden"
+        accept="image/*"
+        onChange={handleImageChange}
+      />
+    </label>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Enviando..." : "Enviar"}
-        </button>
-      </form>
+    {/* Nombre del archivo */}
+    {imageName && (
+      <p className="text-sm text-gray-600">
+        Archivo seleccionado: <span className="font-medium">{imageName}</span>
+      </p>
+    )}
 
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+    {/* Botón Enviar */}
+    <button
+      type="submit"
+      disabled={loading}
+      className="
+        bg-blue-600 
+    text-white 
+    px-6 py-3 
+    disabled:bg-blue-400 
+    disabled:text-white 
+    disabled:cursor-not-allowed
+      "
+    >
+      {loading ? "Enviando..." : "Enviar"}
+    </button>
+  </div>
+</form>
+
+{/* Mensajes */}
+{error && <p className="text-red-600 mt-2 text-center">Error: {error}</p>}
+{success && <p className="text-green-600 mt-2 text-center">{success}</p>}
+
     </>
   );
 }
