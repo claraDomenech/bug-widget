@@ -9,7 +9,7 @@
   min-width:320px!important;
   margin:unset!important;
   max-width:320px;
-  background:transparent
+  background-color:transparent!important;
 }
 
 .logo {
