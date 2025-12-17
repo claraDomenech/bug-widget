@@ -1,17 +1,19 @@
 #root, body, html {
-  width:320px;
+  width:280px;
   min-height:unset;
-  height:355px;
+  height:335px;
   position:relative;
   max-width: unset;
   min-width:unset;
   display:block;
-  min-width:320px!important;
+  min-width:280px!important;
   margin:unset!important;
-  max-width:320px;
+  max-width:280px;
   background-color:transparent!important;
 }
-
+form{
+  max-width:280px;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -49,7 +51,7 @@
 }
 #root > button{
     position: absolute;
-    top: 310px;
+    top: 290px;
     right: 0;
     bottom: unset;
 

@@ -9,7 +9,7 @@ function App() {
     <>
     {/* Formulario desplegable */}
       {open && (
-        <div className="widget-container bottom-24 w-80 max-h-[80vh] overflow-auto bg-white rounded-xl shadow-2xl z-40 animate-fadeIn">
+        <div className="widget-container bottom-24 max-h-[80vh] overflow-auto bg-white rounded-xl shadow-2xl z-40 animate-fadeIn">
           <Formulario />
         </div>
       )}

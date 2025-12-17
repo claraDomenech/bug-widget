@@ -79,7 +79,7 @@ export default function Formulario() {
 
   return (
     <>
-     <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-4 rounded-md shadow-md mx-auto">
+     <form onSubmit={handleSubmit} className="w-full bg-white p-4 rounded-md shadow-md mx-auto">
   <div className="flex flex-col w-full">
 
     {/* Textarea */}
