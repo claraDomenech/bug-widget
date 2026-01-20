@@ -67,9 +67,10 @@ export default async function handler(req, res) {
     const todayStr = `${year}-${month}-${day}`;
 
     // Crear tarea
+    const cleanDescription = description.split("\n\n Número documento")[0];
     const taskPayload = {
       data: {
-        name: description.slice(0, 80) || "Nueva tarea desde formulario",
+        name: cleanDescription.slice(0, 80) || "Nueva tarea desde formulario",
         notes: description,
         workspace: ASANA_WORKSPACE_GID,
         assignee: ASANA_ASSIGNEE_GID,

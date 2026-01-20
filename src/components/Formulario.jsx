@@ -12,7 +12,7 @@ export default function Formulario({ onSuccess }) {
 
   const [searchParams] = useSearchParams();
 
-  const API_BASE = import.meta.env.VITE_API_BASE || ""; //"https:bug-widget.vercel.app";
+  const API_BASE = "https:bug-widget.vercel.app"; //import.meta.env.VITE_API_BASE || ""; //
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
