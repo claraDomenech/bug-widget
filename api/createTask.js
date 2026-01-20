@@ -38,8 +38,15 @@ export default async function handler(req, res) {
   const ASANA_SECTION_GID = process.env.ASANA_DEFAULT_SECTION_GID;
   const ASANA_URGENTE_GID = process.env.ASANA_URGENTE_SECTION_GID;
 
-  if (!ASANA_TOKEN || !ASANA_WORKSPACE_GID || !ASANA_PROJECT_GID || !ASANA_ASSIGNEE_GID) {
-    return res.status(500).json({ error: "Missing Asana environment variables" });
+  if (
+    !ASANA_TOKEN ||
+    !ASANA_WORKSPACE_GID ||
+    !ASANA_PROJECT_GID ||
+    !ASANA_ASSIGNEE_GID
+  ) {
+    return res
+      .status(500)
+      .json({ error: "Missing Asana environment variables" });
   }
 
   try {
@@ -62,7 +69,10 @@ export default async function handler(req, res) {
     // Crear tarea
     const taskPayload = {
       data: {
-        name: description.slice(0, 80) || "Nueva tarea desde formulario",
+        name:
+          description
+            .split("\n\n Número documento")[0]
+            .description.slice(0, 80) || "Nueva tarea desde formulario",
         notes: description,
         workspace: ASANA_WORKSPACE_GID,
         assignee: ASANA_ASSIGNEE_GID,
@@ -110,7 +120,10 @@ export default async function handler(req, res) {
 
       if (!sectionRes.ok) {
         const errorText = await sectionRes.text();
-        sectionResult = { error: "Ticket creado con éxito, error al añadir a sección.", details: errorText };
+        sectionResult = {
+          error: "Ticket creado con éxito, error al añadir a sección.",
+          details: errorText,
+        };
       } else {
         sectionResult = await sectionRes.json();
       }

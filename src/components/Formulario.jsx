@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Formulario({ onSuccess }) {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,9 @@ export default function Formulario({ onSuccess }) {
   const [imageName, setImageName] = useState("");
   const [urgent, setUrgent] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_BASE || "";
+  const [searchParams] = useSearchParams();
+
+  const API_BASE = import.meta.env.VITE_API_BASE || ""; //"https:bug-widget.vercel.app";
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -22,6 +25,16 @@ export default function Formulario({ onSuccess }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    const numDocumento = searchParams.get("numDocumento");
+    const numPoliza = searchParams.get("numPoliza");
+
+    const finalDescription =
+      description +
+      "\n\n Número documento : " +
+      (numDocumento || "No proporcionado") +
+      "\n Número póliza : " +
+      (numPoliza || "No proporcionado");
 
     try {
       let imageBase64 = null;
@@ -39,7 +52,7 @@ export default function Formulario({ onSuccess }) {
       }
 
       const body = {
-        description,
+        description: finalDescription,
         imageBase64,
         imageName: imageNameLocal,
         urgent,
